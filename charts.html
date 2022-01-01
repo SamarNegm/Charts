@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <h1>Charts</h1>
+    <div class="container">
+        <table id="data">
+            <tr>
+                <td>
+                    <label for="chemstry"> Chemstry</label>
+                </td>
+                <td>
+                    <input type="text" id="chemstry">
+                </td>
+                <td>
+                    <label for="science">Science: </label>
+                </td>
+                <td>
+                    <input type="text" name="" id="science">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="math">Math: </label>
+                </td>
+                <td>
+                    <input type="text" name="" id="math">
+                </td>
+                <td>
+                    <label for="arabic">Arabic: </label>
+                </td>
+                <td>
+                    <input type="text" name="" id="arabic">
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label for="">Phsics:</label>
+                </td>
+                <td>
+                    <input type="text" id=phsics>
+                </td>
+            </tr>
+        </table>
+        <div class="row">
+            <button id="calculate">
+                Calculate
+            </button>
+        </div>
+        <div class="charts">
+            <table>
+                <tr>
+                    <td style=" margin-right: 40px;">
+
+                        <div id="dataColors" style="width: 300px; display: none; margin-right: 40px;">
+                            <br>
+                            <span style="color:#D77FA1">Chemstry</span>
+                            <br>
+                            <span style="color: #BAABDA;">
+                                Math
+                            </span>
+                            <br>
+                            <span style="color:#889db9">Phsics</span>
+                            <br>
+                            <span style="color:#FF5959">Science</span>
+                            <br>
+                            <span style="color:#FFBC97">Arabic</span>
+                            <br>
+                        </div>
+                    </td>
+                    <td>
+
+                        <canvas id="coulumChart"></canvas>
+                    </td>
+                    <td>
+
+                        <canvas id="paiChart1"></canvas>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <canvas id="lineChart"></canvas>
+                      
+                    </td>
+                    <td>
+
+                        <canvas id="paiChart2"></canvas>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <script src="/js/charts.js"></script>
+</body>
+
+</html>

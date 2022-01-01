@@ -1,0 +1,135 @@
+.container{
+    width: 90%;
+    height: 100vh;
+    text-align: center;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+body {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    color:#3e7575;
+    text-align:  center; 
+
+
+}
+body::after {
+    content: "";
+    background-image: url(s1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    resize: vertical;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;   
+  }
+h1{
+    text-align:  center;
+    background: #e6738a;
+    background: -webkit-linear-gradient(to right, #62cece, #62cece, #e6738a);
+    background: linear-gradient(to right, #62cece, #c48787, #e6738a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 57px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#data{
+    margin: 15px auto;
+    border: 1px solid #e6738a;
+    border-radius: 20px;
+    padding: 15px;
+    border-collapse: separate;
+    border-spacing: 0 14px;
+    width: 89%;
+}
+
+table td:nth-child(odd){
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    border-left: 1px solid #3e7575;
+    text-align: left;
+    padding-left: 14px;
+}
+table td input{
+    padding: 5px;
+    border-radius: 20px;
+    border: 1px solid #e6738a;
+}
+.row{
+     width: 90%;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+.row button {
+    background-image: linear-gradient(to right, #e6738a 0%, #82d1d1  51%, #e6738a  100%)
+}
+.row button {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color:    #fff;          
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   width: 300px;
+   display: block;
+   border-radius: 20px;
+ }
+
+ .row button:hover {
+   background-position: right center; /* change the direction of the change here */
+   color:  #fff;          
+   ;
+   text-decoration: none;
+ }
+
+.charts{
+    width: 90%;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+ button:focus {
+    outline: none;
+    border-color: #F38BA0;
+    border-radius: 20px;
+  }
+  input:focus{
+    outline: none;
+      border-color: #F38BA0;
+  }
+ 
+canvas{
+    border: 1px solid;
+    margin: 17px;
+    padding: 0px 12px;
+
+    border-radius: 20px 20px 0 0;
+    border:1px solid #F38BA0;
+    display: none;
+}
+table{
+    border-spacing :50px 40px;
+  }
