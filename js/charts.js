@@ -43,7 +43,6 @@ calculateBtn.addEventListener("click", function (e) {
 function Valid(subjects) {
     if (totla == 0) return 0;
     for (let i = 0; i < subjects.length; i++) {
-        console.log(" i " + i + " " + subjects[i].value == NaN);
         if (isNaN(subjects[i]))
             return 0;
     }
@@ -58,29 +57,23 @@ function DrawCoulumChart(e) {
     ctx.clearRect(0, 0, coulumChart.width, coulumChart.height);
     for (var i = 0; i < subjects.length; i++) {
 
-        drawRecBar(i + (i * 50), subjects[i], colors[i]);
+        drawRecBar(i + (i * 50), i);
     }
 
 }
 
-function drawRecBar(start, ratio, color) {
+function drawRecBar(start, curr) {
     var x = 0
-    ratio;
     requestAnimationFrame(function loop() {
         ctx.beginPath();
         ctx.rect(start, coulumChart.height, 40, -x);
-        ctx.fillStyle = color;
+        ctx.fillStyle = colors[curr];
         ctx.fill();
         ctx.closePath();
 
         x++;
-        if (x > ratio) {
-            ctx.beginPath();
-            ctx.strokeStyle = color;
-            ctx.fill();
-            ctx.font = "10px";
-            ctx.strokeText((ratio.toFixed(0) + "%"), start, (coulumChart.height - ratio - 4));
-            ctx.closePath();
+        if (x > subjects[curr]) {
+            Drawtext(ctx, curr, start, (coulumChart.height - subjects[curr] - 4));
             return;
         }
         requestAnimationFrame(loop)
@@ -94,7 +87,6 @@ function DrawLineChart() {
     ctx2.clearRect(0, 0, lineChart.width, lineChart.height);
 
     for (let i = 0; i < subjects.length; i++) {
-
         ctx2.strokeStyle = colors[i];
         ctx2.beginPath();
         ctx2.lineWidth = 5;
@@ -102,12 +94,7 @@ function DrawLineChart() {
         ctx2.lineTo(i + (i * 50) + 50, lineChart.height - subjects[i + 1]);
         ctx2.stroke();
         ctx2.closePath();
-
-        ctx2.beginPath();
-        ctx2.lineWidth = 1;
-        ctx2.font = "10px ";
-        ctx2.strokeText((subjects[i].toFixed(0) + "%"), i + (i * 50), lineChart.height - subjects[i] - 10);
-        ctx2.closePath();
+        Drawtext(ctx2, i, (i + (i * 50)), (lineChart.height - subjects[i] - 10));
 
     }
 
@@ -124,7 +111,7 @@ function DrawPaiChart(ctx3, donat = 0) {
     for (let i = 0; i < subjects.length; i++) {
 
         endAngle = startAngle + (2 * Math.PI * subjects[i]) / 100;
-        drawPieSlice(ctx3, paiChart1.width / 2, paiChart1.height / 2, 70, startAngle, endAngle, i, donat);
+        drawPieSlice(ctx3, paiChart1, 70, startAngle, endAngle, i, donat);
         startAngle = endAngle;
 
     }
@@ -135,45 +122,50 @@ function DrawDountChart() {
     ctx4.clearRect(0, 0, paiChart1.width, paiChart1.height);
 
     DrawPaiChart(ctx4, 1);
-    drawPieSlice(ctx4, paiChart1.width / 2, paiChart1.height / 2, 40, 0, 2 * Math.PI, -1, 1);
+    drawPieSlice(ctx4, paiChart1, 40, 0, 2 * Math.PI, -1, 1);
 
 }
-function drawPieSlice(ctx, centerX, centerY, radius, startAngle, endAngle, i, donat) {
+function drawPieSlice(ctx, chart, radius, startAngle, endAngle, i, donat) {
     var color = (i == -1) ?
         color = "white" : colors[i];
-
+    var centerX = chart.width / 2, centerY = chart.height / 2;
     var x = startAngle
     requestAnimationFrame(function loop() {
         if (donat) {
-            drawArc(ctx, paiChart1.width / 2, paiChart1.height / 2, 40, 0, 2 * Math.PI, "white");
+            drawArc(ctx, paiChart1, 40, 0, 2 * Math.PI, "white");
         }
 
-        drawArc(ctx, centerX, centerY, radius, startAngle, x, color);
+        drawArc(ctx, chart, radius, startAngle, x, color);
 
         x += .07;
         if (x > endAngle) {
-            drawArc(ctx, centerX, centerY, radius, startAngle, endAngle, color);
+            drawArc(ctx, chart, radius, startAngle, endAngle, color);
             if (subjects[i] > 7) {
                 var textX = paiChart1.width / 2 + (Math.cos(startAngle + (endAngle - startAngle) / 2) * (radius)) / 1.31;
                 var textY = paiChart1.height / 2 + (Math.sin(startAngle + (endAngle - startAngle) / 2) * (radius)) / 1.31;
-                ctx.beginPath();
-                ctx.strokeStyle = "white";
-                ctx.fill();
-                ctx.font = "10px";
-                ctx.strokeText((subjects[i].toFixed(0) + "%"), textX, textY);
-                ctx.closePath();
+                Drawtext(ctx, i, textX, textY, "white")
+
             }
             return;
         }
         requestAnimationFrame(loop)
     });
 }
-console.log(paiChart2.height + " " + paiChart2.width);
-function drawArc(ctx, centerX, centerY, radius, startAngle, endAngle, color) {
+function drawArc(ctx, chart, radius, startAngle, endAngle, color) {
+    var centerX = chart.width / 2, centerY = chart.height / 2;
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.arc(centerX, centerY, radius, startAngle, endAngle);
     ctx.fillStyle = color;
     ctx.fill();
+    ctx.closePath();
+}
+
+function Drawtext(ctx, curr, x, y, color = null) {
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.font = "10px ";
+    ctx.strokeStyle = (color ?? colors[curr]);
+    ctx.strokeText((subjects[curr].toFixed(0) + "%"), x, y);
     ctx.closePath();
 }
